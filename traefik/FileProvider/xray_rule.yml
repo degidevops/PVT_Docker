@@ -1,0 +1,25 @@
+http:
+  routers:
+    xray-core:
+      entryPoints:
+        - tls
+      rule:
+        Host("xray.localhost") && PathPrefix("/trojan", "/vless") || PathPrefix("/trojan", "/vless")
+      service:
+        xray-service-http
+      tls: {}
+
+  services:
+    xray-service-http:
+      loadBalancer:
+        servers:
+          - url: "http://172.19.0.3:44300"
+
+  serversTransports:
+    xray-transport:
+      serverName: "xray.localhost"
+      certificates:
+        - certFile: "/cert/localhost.cert"
+          keyFile: "/cert/localhost.key"
+      insecureSkipVerify: true
+

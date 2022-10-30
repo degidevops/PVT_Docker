@@ -1,0 +1,34 @@
+global:
+  checkNewVersion: true
+  sendAnonymousUsage: true
+
+log:
+  level: ERROR
+  filePath: /traefik/log/traefik.log
+  format: json
+
+accessLog: {}
+  
+api:
+  debug: true
+  insecure: true
+  dashboard: true
+
+entryPoints:
+  notls:
+    address: :80
+
+  tls:
+    address: :443
+
+serversTransport:
+  insecureSkipVerify: true
+
+providers:
+  docker:
+    endpoint: "/var/run/docker.sock"
+    exposedByDefault: false
+
+  file:
+    watch: true
+    directory: "/FileProvider"

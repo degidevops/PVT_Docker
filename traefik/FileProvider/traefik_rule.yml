@@ -1,0 +1,18 @@
+http:
+  routers:
+    traefik:
+      entryPoints:
+        - notls
+      rule:
+        Host("traefik.localhost") && PathPrefix("/") || PathPrefix("/api", "/dashboard")
+      service:
+        api@internal
+      middlewares:
+        traefikauth
+      tls: {}
+
+  middlewares:
+    traefikauth:
+      basicAuth:
+        users:
+          - "admin:$apr1$4AXZMvCG$aAVprHpKc7iJCiKUZ.EcM."

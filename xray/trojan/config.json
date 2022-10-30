@@ -1,0 +1,38 @@
+{
+    "log": {
+        "loglevel": "warning"
+    },
+    "inbounds": [
+   {
+      "port": 44300,
+      "protocol": "trojan",
+      "settings": {
+        "clients": [
+          {
+            "password": "msecure"
+          }
+        ],
+        "disableInsecureEncryption": false
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "none",
+        "wsSettings": {
+          "path": "/trojan",
+          "header": {}
+        }
+      }
+    }
+  ],
+  "outbounds": [
+    {
+      "protocol": "freedom",
+      "settings": {}
+    },
+    {
+      "protocol": "blackhole",
+      "settings": {},
+      "tag": "blocked"
+    }
+  ]
+}
